@@ -2,9 +2,9 @@ import { Category, ListParams, ListResponse } from "models";
 import axiosClient from "./axiosClient";
 
 export const categoryApi = {
-  getAll(params: ListParams): Promise<ListResponse<Category>> {
+  getAll(): Promise<ListResponse<Category>> {
     const url = `/categories`;
-    return axiosClient.get(url, { params });
+    return axiosClient.get(url);
   },
   getById(id: string | number): Promise<Category> {
     const url = `/categories/${id}`;

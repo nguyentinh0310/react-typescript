@@ -10,3 +10,4 @@ export interface Product {
   createdAt?: number;
   updatedAt?: number;
 }
+
