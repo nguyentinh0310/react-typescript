@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductSort from '../components/ProductSort';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,14 +40,14 @@ export default function ListPage() {
   const [filters, setFilters] = useState({
     _page: 1,
     _limit: 12,
-    // _sort: 'salePrice:ASC',
+    _sort: 'salePrice',
+    _order: 'desc',
   });
   const [pagination, setPagination] = useState({
     _page: 1,
     _limit: 12,
     _totalRows: 12,
   });
-
   useEffect(() => {
     (async () => {
       try {
@@ -76,6 +77,16 @@ export default function ListPage() {
     }));
   };
 
+  const handleSortChange = (newFilter: ListParams) => {
+    const [_sort, _order] = newFilter.split('.');
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      _page: 1,
+      _sort: _sort,
+      _order: _order,
+    }));
+  };
+
   return (
     <Box className={classes.root}>
       <Container>
@@ -86,6 +97,10 @@ export default function ListPage() {
             </Paper>
           </Grid>
           <Grid item className={classes.right}>
+            <ProductSort
+              currentSort={filters._sort ? `${filters._sort}.${filters._order}` : ''}
+              onChange={handleSortChange}
+            />
             <Paper elevation={0}>
               {loading ? <ProductSkeletonList length={12} /> : <ProductList data={productList} />}
               <Box className={classes.pagination}>

@@ -3,6 +3,7 @@ import { ListParams } from 'models';
 import React from 'react';
 import FilterByCategory from './Filter/FilterByCategory';
 import FilterByPrice from './Filter/FilterByPrice';
+import FilterByService from './Filter/FilterByService';
 
 export interface ProductFilterProps {
   filters: ListParams;
@@ -20,14 +21,17 @@ export default function ProductFilter({ filters, onChange }: ProductFilterProps)
     onChange(newFilter);
   };
 
-  const handleFiter = (newFilter: ListParams) =>{
-    console.log(newFilter)
-  }
+  const handleOnChange = (newFilter: ListParams) => {
+    if (onChange) {
+      onChange(newFilter);
+    }
+  };
 
   return (
     <Box>
       <FilterByCategory onChange={handleFiterCategory} />
-      <FilterByPrice onChange={handleFiter} />
+      <FilterByPrice onChange={handleOnChange} />
+      <FilterByService filters={filters} onChange={handleOnChange} />
     </Box>
   );
 }

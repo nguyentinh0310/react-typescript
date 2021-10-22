@@ -33,24 +33,38 @@ export default function FilterByPrice({ onChange }: FilterByPriceProps) {
     salePrice_lte: 0,
   });
 
-  const handleChange = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleChange = (e: ChangeEvent<{ name?: any; value: unknown }>) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    // xét gtri trc và sau
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
   };
+
+  const handleSubmit = () =>{
+    if(!onChange) return
+    onChange(values)
+    setValues({
+      salePrice_gte: 0,
+      salePrice_lte: 0,
+    })
+  }
 
   return (
     <Box className={classes.root}>
       <Typography variant="subtitle2">LỌC KHOẢNG GIÁ</Typography>
 
       <Box className={classes.range}>
-        <TextField name="salePrice_gte" value={values.salePrice_gte} onChange={handleChange} />
+        <TextField type="number" name="salePrice_gte" value={values.salePrice_gte} onChange={handleChange} />
         <span> - </span>
-        <TextField name="salePrice_lte" value={values.salePrice_lte} onChange={handleChange} />
+        <TextField type="number" name="salePrice_lte" value={values.salePrice_lte} onChange={handleChange} />
       </Box>
 
-      {/* <Button variant="outlined" color="primary" size="small" onClick={handleSubmit}>
+      <Button variant="outlined" color="primary" size="small" onClick={handleSubmit}>
         Áp dụng
-      </Button> */}
+      </Button>
     </Box>
   );
 }

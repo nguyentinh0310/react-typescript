@@ -6,11 +6,11 @@ export interface Product {
   shortDescription: string;
   description: string;
   originalPrice: number;
+  isFreeShip: boolean;
   salePrice: number;
   isPromotion: number;
   promotionPercent: number;
 
-  isFreeShip?: boolean;
   createdAt?: number;
   updatedAt?: number;
 }
