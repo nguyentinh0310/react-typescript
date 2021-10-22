@@ -1,9 +1,10 @@
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import { productApi } from 'api/productApi';
-import { Product } from 'models';
+import { ListParams, Product } from 'models';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 
@@ -38,6 +39,7 @@ export default function ListPage() {
   const [filters, setFilters] = useState({
     _page: 1,
     _limit: 12,
+    // _sort: 'salePrice:ASC',
   });
   const [pagination, setPagination] = useState({
     _page: 1,
@@ -51,7 +53,6 @@ export default function ListPage() {
         const { data, pagination } = await productApi.getAll(filters);
         setProductList(data);
         setPagination(pagination);
-        console.log(data);
       } catch (error) {
         console.log('Failed to fetch product list: ', productList);
       }
@@ -59,20 +60,30 @@ export default function ListPage() {
     })();
   }, [filters]);
 
-
-  const handlePageChange = (e: any, page: number) =>{
-    setFilters(prevFilter =>({
+  const handlePageChange = (e: any, page: number) => {
+    setFilters((prevFilter) => ({
       ...prevFilter,
-      _page: page
-    }))
-  }
+      _page: page,
+    }));
+  };
+
+  const handleFilterChange = (newFilter: ListParams) => {
+    console.log(newFilter);
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      _page: 1,
+      ...newFilter,
+    }));
+  };
 
   return (
     <Box className={classes.root}>
       <Container>
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
-            <Paper elevation={0}>Left</Paper>
+            <Paper elevation={0}>
+              <ProductFilter filters={filters} onChange={handleFilterChange} />
+            </Paper>
           </Grid>
           <Grid item className={classes.right}>
             <Paper elevation={0}>

@@ -2,7 +2,7 @@ import { Category, ListParams, ListResponse } from "models";
 import axiosClient from "./axiosClient";
 
 export const categoryApi = {
-  getAll(): Promise<ListResponse<Category>> {
+  getAll(): Promise<Category[]> {
     const url = `/categories`;
     return axiosClient.get(url);
   },

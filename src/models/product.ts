@@ -2,12 +2,19 @@ export interface Product {
   categoryId?: string | number;
   id?: string | number;
   name: string;
-  color: string;
-  image: string;
+  images: Images;
+  shortDescription: string;
   description: string;
-  price: number;
+  originalPrice: number;
+  salePrice: number;
+  isPromotion: number;
+  promotionPercent: number;
 
+  isFreeShip?: boolean;
   createdAt?: number;
   updatedAt?: number;
 }
 
+interface Images {
+  [key: string]: string;
+}
