@@ -4,6 +4,7 @@ import { productApi } from 'api/productApi';
 import { ListParams, Product } from 'models';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import FilterByViewer from '../components/Filter/FilterByViewer';
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
@@ -86,6 +87,10 @@ export default function ListPage() {
       _order: _order,
     }));
   };
+  const setNewFilter = (newFilter: ListParams) => {
+    // setFilters(newFilter);
+    console.log(newFilter);
+  };
 
   return (
     <Box className={classes.root}>
@@ -101,6 +106,7 @@ export default function ListPage() {
               currentSort={filters._sort ? `${filters._sort}.${filters._order}` : ''}
               onChange={handleSortChange}
             />
+            <FilterByViewer filters={filters} onChange={setNewFilter} />
             <Paper elevation={0}>
               {loading ? <ProductSkeletonList length={12} /> : <ProductList data={productList} />}
               <Box className={classes.pagination}>
