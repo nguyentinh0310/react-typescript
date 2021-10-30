@@ -4,15 +4,19 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import ProductFeature from 'features/Product';
 import Header from 'components/Layout/Header';
 import NotFound from 'components/Layout/NotFound';
+import StudentFeature from 'features/DashBoard/student';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Switch>
-        <Redirect from="/" to="/products" exact />
+        <Redirect from="/" to="/admin" exact />
         <Route path="/products">
-          <ProductFeature/>
+          <ProductFeature />
+        </Route>
+        <Route path="/admin">
+          <StudentFeature />
         </Route>
         <Route>
           <NotFound />
