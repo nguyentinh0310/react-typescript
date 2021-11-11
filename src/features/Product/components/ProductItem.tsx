@@ -1,14 +1,19 @@
 import { Box, Typography } from '@material-ui/core';
 import { Product } from 'models';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export interface ProductItemProps {
   product: Product;
 }
 
 export default function ProductItem({ product }: ProductItemProps) {
+  const history = useHistory()
+  const handleClick =() =>{
+    history.push(`/products/${product.id}`)
+  }
   return (
-    <Box padding={1}>
+    <Box padding={1} onClick={handleClick}>
       <Box padding={1}>
         <img src={product.images[0]} alt={product.name} width="100%" height="200px" />
       </Box>

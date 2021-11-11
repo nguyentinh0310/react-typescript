@@ -2,7 +2,7 @@ import { Box, Button, LinearProgress, makeStyles, Typography } from '@material-u
 import { Pagination } from '@material-ui/lab';
 import { studentApi } from 'api/studentApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchCity, selectCityList, selectCityMap } from 'features/DashBoard/city/citySlice';
+import { fetchCity, selectCityMap } from 'features/DashBoard/city/citySlice';
 import { Student } from 'models';
 import React, { useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
@@ -15,7 +15,7 @@ import {
   selectStudentFilter,
   selectStudentList,
   selectStudentPagination,
-  studentActions,
+  studentActions
 } from '../studentSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,8 +52,8 @@ export default function ListPage() {
   const pagination = useAppSelector(selectStudentPagination);
   const filter = useAppSelector(selectStudentFilter);
   const cityMap = useAppSelector(selectCityMap);
-  const cityList = useAppSelector(selectCityList);
 
+  
   useEffect(() => {
     dispatch(fetchStudentList(filter));
   }, [dispatch, filter]);

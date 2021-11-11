@@ -124,9 +124,10 @@ export default function FilterByViewer({ filters = {}, onChange }: FilterByViewe
             //         onChange(newFilter);
             //       }
             // }
-            // onDelete={
+            // onDelete={ 
             //   x.isRemovable
-            //     ? () => {
+            //     ?
+            //      () => {
             //         if (!onChange) return;
 
             //         const newFilter: any = x.onRemove(filters);

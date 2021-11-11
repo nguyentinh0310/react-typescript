@@ -23,7 +23,7 @@ export default function RadioGroupField({
   options,
 }: RadioGroupFieldProps) {
   const {
-    field: { onBlur, onChange, ref, value },
+    field: { onBlur, onChange, value },
     fieldState: { invalid, error },
   } = useController({ name, control });
   return (

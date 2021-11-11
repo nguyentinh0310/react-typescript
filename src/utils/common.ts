@@ -1,11 +1,15 @@
 export const capitalizeString = (str: string): string => {
-    if (!str) return '';
-  
-    return `${str[0].toUpperCase()}${str.slice(1)}`;
-  };
-  
-  export const getMarkColor = (mark: number): string => {
-    if (mark >= 8) return 'green';
-    if (mark >= 4) return 'goldenrod';
-    return 'red';
-  };
+  if (!str) return '';
+
+  return `${str[0].toUpperCase()}${str.slice(1)}`;
+};
+
+export const getMarkColor = (mark: number): string => {
+  if (mark >= 8) return 'green';
+  if (mark >= 4) return 'goldenrod';
+  return 'red';
+};
+
+export const formatPrice = (price: any) =>{
+  return Intl.NumberFormat('vi-VN',{style: 'currency',currency:'VND'}).format(price)
+}

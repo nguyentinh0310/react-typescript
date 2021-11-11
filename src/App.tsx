@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Redirect from="/" to="/admin" exact />
+        <Redirect from="/" to="/products" exact />
         <Route path="/products">
           <ProductFeature />
         </Route>
-        <Route path="/admin">
+        <Route path="/admin" >
           <StudentFeature />
         </Route>
         <Route>
