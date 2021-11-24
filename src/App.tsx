@@ -5,6 +5,7 @@ import ProductFeature from 'features/Product';
 import Header from 'components/Layout/Header';
 import NotFound from 'components/Layout/NotFound';
 import StudentFeature from 'features/DashBoard/student';
+import CartFeature from 'features/Cart';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/admin" >
           <StudentFeature />
+        </Route>
+        <Route path="/carts" >
+          <CartFeature />
         </Route>
         <Route>
           <NotFound />
