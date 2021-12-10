@@ -19,7 +19,7 @@ function App() {
         <Route path="/admin" >
           <StudentFeature />
         </Route>
-        <Route path="/carts" >
+        <Route path="/cart" >
           <CartFeature />
         </Route>
         <Route>

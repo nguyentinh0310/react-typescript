@@ -1,9 +1,6 @@
 export interface Cart {
   id?: string | number;
-  product: ProductItem;
+  product: any;
   quantity: number;
 }
 
-export interface ProductItem {
-  [key: string]: string;
-}

@@ -1,10 +1,15 @@
-import  React from 'react';
+import { Box } from '@material-ui/core';
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import ListPage from './pages/ListPage';
 
-
-export default function CartFeature () {
+export default function CartFeature() {
+  const match = useRouteMatch();
   return (
-    <div>
-      
-    </div>
+    <Box>
+      <Switch>
+        <Route path={match.url} exact component={ListPage} />
+      </Switch>
+    </Box>
   );
 }

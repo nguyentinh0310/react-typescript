@@ -1,7 +1,9 @@
 import { Box, Container, Grid, LinearProgress, makeStyles, Paper } from '@material-ui/core';
+import { useAppDispatch } from 'app/hooks';
+import { addToCart } from 'features/Cart/cartSlice';
 import useProductDetail from 'hooks/useFetch';
 import React from 'react';
-import { useParams,Switch,Route,useRouteMatch } from 'react-router-dom';
+import { useParams, Switch, Route, useRouteMatch } from 'react-router-dom';
 import AddToCartForm from '../components/AddToCartForm';
 import ProductInfo from '../components/ProducInfo';
 import ProductDescription from '../components/ProductDescription';
@@ -21,28 +23,37 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 1 0',
     padding: theme.spacing(1.5),
   },
-  loading:{
+  loading: {
     position: 'fixed',
     top: 0,
     left: 0,
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 export default function DetailPage() {
   const classes = useStyles();
   const { productId } = useParams<{ productId: string }>();
   const { url } = useRouteMatch();
+  const dispatch = useAppDispatch();
 
   const { product, loading } = useProductDetail(productId);
 
   if (loading) {
-    return <LinearProgress className={classes.loading}/>
+    return <LinearProgress className={classes.loading} />;
   }
 
-  const handleAddToCartForm = (formValues: any) =>{
-    console.log("form subnit", formValues)
-  }
+  const handleAddToCartForm = ({ quantity }: any) => {
+    // console.log('form subnit', formValues);
+    dispatch(
+      addToCart({
+        id: product?.id,
+        product,
+    
+        quantity,
+      })
+    );
+  };
 
   return (
     <Box className={classes.root}>
@@ -58,14 +69,14 @@ export default function DetailPage() {
             </Grid>
           </Grid>
         </Paper>
-          <ProductMenu/>
+        <ProductMenu />
 
-          <Switch>
-            <Route path={url} exact>
-              <ProductDescription product={product}/>
-            </Route>
-            <Route path={`${url}/reviews`} component={ProductReviews}/>
-          </Switch>
+        <Switch>
+          <Route path={url} exact>
+            <ProductDescription product={product} />
+          </Route>
+          <Route path={`${url}/reviews`} component={ProductReviews} />
+        </Switch>
       </Container>
     </Box>
   );
